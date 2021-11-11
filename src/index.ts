@@ -1,6 +1,5 @@
-import type { Plugin } from 'vite'
 import type { ExternalOption } from 'rollup'
-import type { ChangeCaseType, VitePluginOptions, LibraryNameChangeCase, Lib } from './types'
+import type { ChangeCaseType, LibraryNameChangeCase, PluginOptions, Plugin, Lib } from './types'
 import { createFilter } from '@rollup/pluginutils'
 import * as changeCase from 'change-case'
 import { init, parse, ImportSpecifier } from 'es-module-lexer'
@@ -10,7 +9,7 @@ import fs from 'fs'
 import Debug from 'debug'
 import { fileExists, isPnp, isRegExp, resolveNodeModules, resolvePnp } from './utils'
 
-const debug = Debug('vite-plugin-style-import')
+const debug = Debug('rollup-plugin-style-import')
 
 const ensureFileExts: string[] = ['.css', '.js', '.scss', '.less', '.styl']
 
@@ -20,7 +19,7 @@ const isFn = (value: any): value is (...args: any[]) => any =>
 
 export * from './types'
 
-export default (options: VitePluginOptions): Plugin => {
+export default (options: PluginOptions): Plugin => {
   const {
     include = ['**/*.vue', '**/*.ts', '**/*.js', '**/*.tsx', '**/*.jsx'],
     exclude = 'node_modules/**',
@@ -29,21 +28,14 @@ export default (options: VitePluginOptions): Plugin => {
 
   const filter = createFilter(include, exclude)
 
-  let needSourcemap = false
-  let isBuild = false
+  const needSourcemap = false
+  const isBuild = false
   let external: ExternalOption | undefined
 
   debug('plugin options:', options)
 
   return {
-    name: 'vite:style-import',
-    enforce: 'post',
-    configResolved(resolvedConfig) {
-      needSourcemap = !!resolvedConfig.build.sourcemap
-      isBuild = resolvedConfig.isProduction || resolvedConfig.command === 'build'
-      external = resolvedConfig?.build?.rollupOptions?.external ?? undefined
-      debug('plugin config:', resolvedConfig)
-    },
+    name: 'style-import',
     async transform(code, id) {
       if (!code || !filter(id) || !needTransform(code, libs)) {
         return null

@@ -8,7 +8,7 @@
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "outDir": "dist",
-    "types": ["vite/client", "jest", "node"],
+    "types": ["jest", "node"],
     "sourceMap": false,
     "noEmitOnError": true
   },

@@ -1,5 +1,5 @@
 {
-  "name": "vite-plugin-style-import",
+  "name": "rollup-plugin-style-import",
   "version": "1.3.0",
   "description": "A plug-in that imports component library styles on demand",
   "main": "dist/index.js",
@@ -25,19 +25,19 @@
     "prepare": "husky install"
   },
   "keywords": [
-    "vite",
+    "rollup",
     "style",
     "import",
     "css"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/anncwb/vite-plugin-style-import"
+    "url": "https://github.com/iamfat/rollup-plugin-style-import"
   },
   "bugs": {
-    "url": "https://github.com/anncwb/vite-plugin-style-import/issues"
+    "url": "https://github.com/iamfat/rollup-plugin-style-import/issues"
   },
-  "homepage": "https://github.com/anncwb/vite-plugin-style-import/tree/master/#readme",
+  "homepage": "https://github.com/iamfat/rollup-plugin-style-import/tree/master/#readme",
   "dependencies": {
     "@rollup/pluginutils": "^4.1.1",
     "change-case": "^4.1.2",
@@ -45,9 +45,7 @@
     "es-module-lexer": "^0.9.3",
     "magic-string": "^0.25.7"
   },
-  "peerDependencies": {
-    "vite": ">=2.0.0"
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^14.1.0",
     "@commitlint/config-conventional": "^14.1.0",
@@ -69,8 +67,7 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.7",
     "tsup": "^5.5.0",
-    "typescript": "^4.4.4",
-    "vite": "^2.6.13"
+    "typescript": "^4.4.4"
   },
   "resolutions": {
     "esbuild": "0.11.3"

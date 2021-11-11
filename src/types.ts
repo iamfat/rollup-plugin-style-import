@@ -1,3 +1,5 @@
+import type { SourceMap } from 'magic-string'
+
 export type RegOptions = string | RegExp | (string | RegExp)[] | null | undefined
 
 export interface Lib {
@@ -49,15 +51,15 @@ export interface Lib {
   base?: string
 }
 
-export interface VitePluginOptions {
+export interface PluginOptions {
   include?: RegOptions
   exclude?: RegOptions
-  /**
-   * @default process.cwd()
-   * @deprecated 1.2.0 is obsolete
-   */
-  root?: string
   libs: Lib[]
+}
+
+export interface Plugin {
+  name: string
+  transform?: (code: string, id: string) => Promise<{ code: string; map: SourceMap | null } | null>
 }
 
 export interface Source {

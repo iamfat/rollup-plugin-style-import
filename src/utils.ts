@@ -1,6 +1,15 @@
 import path from 'path'
-import { normalizePath } from 'vite'
 import fs from 'fs'
+import os from 'os'
+
+function slash(p: string) {
+  return p.replace(/\\/g, '/')
+}
+
+const isWindows = os.platform() === 'win32'
+function normalizePath(id: string) {
+  return path.posix.normalize(isWindows ? slash(id) : id)
+}
 
 export function resolveNodeModules(libName: string, ...dir: string[]) {
   const modulePath = normalizePath(require.resolve(libName))
